@@ -1,0 +1,45 @@
+using System;
+using System.Windows.Forms;
+
+public partial class TimerAppForm : Form
+{
+    private Timer timer;
+    private int secondsElapsed;
+
+    public TimerAppForm()
+    {
+        InitializeComponent();
+
+        // Инициализиране на таймер и настройка на интервала му на 1 секунда
+        timer = new Timer();
+        timer.Interval = 1000; // 1 секунда = 1000 милисекунди
+        timer.Tick += Timer_Tick;
+    }
+
+    private void Timer_Tick(object sender, EventArgs e)
+    {
+        secondsElapsed++;
+        UpdateTimerLabel();
+    }
+
+    private void btnStart_Click(object sender, EventArgs e)
+    {
+        timer.Start();
+    }
+
+    private void btnStop_Click(object sender, EventArgs e)
+    {
+        timer.Stop();
+    }
+
+    private void btnReset_Click(object sender, EventArgs e)
+    {
+        secondsElapsed = 0;
+        UpdateTimerLabel();
+    }
+
+    private void UpdateTimerLabel()
+    {
+        lblTimer.Text = $"Изминало време: {secondsElapsed} сек.";
+    }
+}
